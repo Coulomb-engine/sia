@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleft.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Taco Cloud订购系统</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+
+<body>
+<h1>Design your taco!</h1>
+<img th:src="@{/image/TacoCloud.png}"/>
+
+<form method="post" th:object="${taco}">
+
+    <span class="validationError" th:if="${#fields.hasErrors('ingredients')}" th:errors="*{ingredients}">配料选择错误</span>
+
+    <div class="grid">
+        <div class="ingredient-group" id="wraps">
+            <h3>Design your wrap:</h3>
+            <div th:each="ingredient : ${wrap}">
+                <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
+                <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+            </div>
+        </div>
+
+        <div class="ingredient-group" id="proteins">
+            <h3>Design your protein:</h3>
+            <div th:each="ingredient : ${protein}">
+                <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
+                <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+            </div>
+        </div>
+
+        <div class="ingredient-group" id="cheeses">
+            <h3>Design your cheese:</h3>
+            <div th:each="ingredient : ${cheese}">
+                <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
+                <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+            </div>
+        </div>
+
+        <div class="ingredient-group" id="veggies">
+            <h3>Design your veggies:</h3>
+            <div th:each="ingredient : ${veggies}">
+                <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
+                <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+            </div>
+        </div>
+
+        <div class="ingredient-group" id="sauces">
+            <h3>Design your sauce:</h3>
+            <div th:each="ingredient : ${sauce}">
+                <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
+                <span th:text="${ingredient.name}">INGREDIENT</span><br/>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <h3>Name your taco creation:</h3>
+        <input type="text" th:field="*{name}">
+        商品名称有误: <span th:text="${#fields.hasErrors('name')}">商品名称有误</span>
+        <span class="validationError" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">商品名称错误</span>
+        <br/>
+
+        <button>Submit your taco</button>
+    </div>
+</form>
+</body>
+</html>
